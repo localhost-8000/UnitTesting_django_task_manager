@@ -178,7 +178,7 @@ def get_next_run_at(report_time, user_timezone='UTC'):
     tz = timezone(user_timezone)
     curr_datetime = tz.localize(datetime.now())
 
-    # Get the current time in UTC
+    # Get the current time in user timezone
     curr_time = curr_datetime.time()
     curr_date = curr_datetime.date()
 

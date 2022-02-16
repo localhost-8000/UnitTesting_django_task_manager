@@ -1,5 +1,6 @@
 
 from datetime import datetime, timedelta
+import pdb
 
 from django.contrib.auth.models import User
 from django.forms import ValidationError
@@ -457,13 +458,14 @@ class TestTaskReportCreateView(TestCase):
 
     def test_get_next_run_at_for_report_time_less_than_current_time(self):
         curr_datetime = datetime.now(tz=timezone('Asia/Kolkata')) - timedelta(minutes=10)
+        print(curr_datetime)
         curr_date = curr_datetime.date() + timedelta(days=1)
         time_zone = 'Asia/Kolkata'
         report_time = curr_datetime.time()
 
         founded_next_run_at = get_next_run_at(report_time, time_zone)        
-        expected_next_run_at = datetime.combine(curr_date, report_time).astimezone(timezone('UTC'))
-
+        expected_next_run_at = datetime.combine(curr_date, report_time, tzinfo=timezone('UTC'))
+        # pdb.set_trace()
         self.assertEqual(expected_next_run_at, founded_next_run_at)
     
     def test_get_next_run_at_for_report_time_greater_than_current_time(self):
