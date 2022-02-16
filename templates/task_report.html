@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+    <div class="">
+        Get daily report of your tasks on preferred mail and timing
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="fieldWrapper">
+            
+            <label for="{{ form.user_mail.id_for_label }}" class="block text-lg font-medium mt-[25px] mb-[4px]">Email</label>
+            <input type="email" id="{{form.user_mail.auto_id}}" class="w-[400px] h-[38px] border-0 rounded-[12px] bg-[#F1F5F9] pl-[8px] focus:outline-none" name="{{form.user_mail.html_name}}" placeholder="mail@example.com" {% if form.user_mail.value %} value="{{form.user_mail.value}}" {% endif %}>
+            <ul>
+                {% for error in form.user_mail.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="fieldWrapper">
+            <label for="{{form.report_time.id_for_label}}" class="block text-lg font-medium mt-[22px] mb-[4px]">Preferred Time</label>
+            <input type="time" id="{{form.report_time.auto_id}}" class="w-[200px] h-[38px] border-0 rounded-[12px] bg-[#F1F5F9] px-[8px] focus:outline-none" name="{{form.report_time.html_name}}" value="{{ form.report_time.value|time:"H:i" | default:"12:00"}}">
+            <ul>
+                {% for error in form.report_time.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="fieldWrapper">
+            <label for="{{ form.timezone.id_for_label }}" class="block text-lg font-medium mt-[12px] mb-[4px]">{{form.timezone.label}}</label>
+            <select name="{{form.timezone.html_name}}" id="{{form.timezone.auto_id}}" class="w-[400px] h-[40px] rounded-[12px] bg-[#F1F5F9] pt-[4px] px-[8px] focus:outline-none">
+                {% for x, y in form.fields.timezone.choices %} 
+                    <option value="{{ x }}" {% if form.timezone.value == x %} selected {% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+            <ul>
+                {% for error in form.timezone.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="fieldWrapper">
+            <input type="checkbox" class="w-[20px] h-[20px] mt-[8px] border-0 rounded-[12px] accent-slate-400 pl-[8px] focus:outline-none" name="{{form.enabled.html_name}}" id="{{form.enabled.auto_id}}" {% if form.enabled.value %} checked {% endif %}>
+            <label for="{{ form.enabled.id_for_label }}" class="inline-block text-lg font-medium mb-[4px] ml-[10px]">Enable</label>
+        </div>
+
+        <button class="bg-[#EF4444] w-[400px] h-[42px] rounded-[12px] text-white mt-12" type="submit">Schedule Report</button>
+    </form>
+{% endblock %}

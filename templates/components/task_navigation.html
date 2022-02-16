@@ -1,0 +1,7 @@
+<h2 class="text-lg text-[#475569] font-normal my-6">{{ completed_tasks_len }} of {{ total_tasks_len }} tasks completed</h2>
+
+<div class="flex items-center justify-between py-2">
+    <a class="px-5 pt-2 pb-3 text-xl font-semibold text-center {% if request.path == '/tasks' %} bg-[#FFE4E6] text-[#EF4444] rounded-[20px] {% else %} hover:bg-[#FFE4E6] hover:rounded-[20px] {% endif %}" href="/tasks">All</a>
+    <a class="px-5 pt-2 pb-3 text-xl font-semibold text-center {% if request.path == '/pending-tasks' %} bg-[#FFE4E6] text-[#EF4444] rounded-[20px] {% else %} hover:bg-[#FFE4E6] hover:rounded-[20px] {% endif %}" href="/pending-tasks">Pending</a>
+    <a class="px-5 pt-2 pb-3 text-xl font-semibold text-center {% if request.path == '/completed-tasks' %} bg-[#FFE4E6] text-[#EF4444] rounded-[20px] {% else %} hover:bg-[#FFE4E6] hover:rounded-[20px] {% endif %}" href="/completed-tasks">Completed</a>
+</div>

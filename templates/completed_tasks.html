@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% include 'components/task_navigation.html' %}
+
+    {% if completed_tasks|length <= 0 %}
+        <h2 class="text-xl font-semibold text-center text-[#EF4444] mt-8">No Completed Tasks!</h2>
+    {% endif %}
+
+    {% for task in completed_tasks %}
+        {% include 'components/task_card.html' %}
+    {% endfor %}
+
+    {% include 'components/paginator.html' %}
+
+{% endblock %}

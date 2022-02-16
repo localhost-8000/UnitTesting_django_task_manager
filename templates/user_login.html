@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-xl font-semibold my-8">Login</h2>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        <ul>
+            {% for error in field.errors %}
+                <li style="color: red;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        <label for="{{ field.id_for_label }}" class="block text-lg font-medium mt-[12px] mb-[4px]">{{field.label}}</label>
+        <input type="{{field.field.widget.input_type}}" class="w-[350px] h-[38px] border-0 rounded-[12px] bg-[#F1F5F9] pl-[8px] focus:outline-none" name="{{field.html_name}}" id="{{field.auto_id}}" required="{{field.required}}">
+        {% if field.help_text %}
+        <p class="text-xs text-[#7C899C] my-2">{{ field.help_text }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="bg-[#EF4444] w-[350px] h-[42px] rounded-[12px] text-white mt-12">Login</button>
+</form>
+
+<a href="/user/signup" class="flex items-center justify-center bg-[#EF4444] w-[350px] h-[42px] rounded-[12px] text-white mt-8">Signup</a>
+
+
+{% endblock  %}

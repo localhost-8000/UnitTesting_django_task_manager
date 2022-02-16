@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class="text-xl font-medium mt-8">Title</h3>
+<p class="text-lg">{{ object.title }}</p>
+
+<h3 class="text-xl font-medium mt-4">Description</h3>
+<p class="text-lg">{{ object.description }}</p>
+
+<h3 class="text-xl font-medium mt-4">Priority</h3>
+<p class="text-lg">{{ object.priority }}</p>
+
+<h3 class="text-xl font-medium mt-4">Task Completed</h3>
+<p class="text-lg">{% if object.completed %} Yes {% else %} No {% endif %}</p>
+
+
+{% endblock %}

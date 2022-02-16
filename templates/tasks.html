@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% include 'components/task_navigation.html' %}
+
+    {% if tasks|length <= 0 %}
+        <h2 class="text-xl font-semibold text-center text-[#EF4444] mt-8">No Tasks Added!</h2>
+    {% endif %}
+
+    {% for task in tasks %}
+        {% include 'components/task_card.html' %}
+    {% endfor %}
+
+    {% include 'components/paginator.html' %}
+
+{% endblock %}

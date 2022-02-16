@@ -1,0 +1,4 @@
+Django==4.0.1
+celery==4.4.7
+redis==4.1.0
+coverage==5.0.4

@@ -1,0 +1,15 @@
+{% if is_paginated %}
+    <div class="flex items-center justify-center">
+            {% if page_obj.has_previous %}
+                <a class="py-[4px] px-[10px] mx-[12px] rounded-[8px] hover:bg-[#FFE4E6]" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="bg-[#FFE4E6] font-semibold py-[4px] px-[10px] mx-[12px] rounded-[8px]">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+                <a class="py-[4px] px-[10px] mx-[12px] rounded-[8px] hover:bg-[#FFE4E6]" href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+    </div>
+{% endif %}
+
+<a class="inline-block text-[20px] font-medium text-center bg-[#EF4444] w-full py-[14px] rounded-[12px] text-white mt-[90px] mb-[10px]" href="create-task">Add</a>

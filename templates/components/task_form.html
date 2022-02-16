@@ -1,0 +1,46 @@
+<form action="" method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {% if forloop.last %}
+
+                <input type="{{field.field.widget.input_type}}" class="w-[20px] h-[20px] mt-[4px] border-0 rounded-[12px] accent-slate-400 pl-[8px] focus:outline-none" name="{{field.html_name}}" id="{{field.auto_id}}" {% if field.value %} checked {% endif %}>
+                <label for="{{ field.id_for_label }}" class="inline-block text-lg font-medium mb-[4px] ml-[10px]">{{field.label}}</label>
+            
+            {% elif field.html_name == 'description' %}
+                
+                <label for="{{ field.id_for_label }}" class="block text-lg font-medium mt-[12px] mb-[4px]">{{field.label}}</label>
+                <textarea name="{{field.html_name}}" id="{{field.auto_id}}" class="w-[400px] h-[140px] rounded-[12px] bg-[#F1F5F9] pl-[8px] focus:outline-none">{% if field.value %}{{field.value}}{% endif %}</textarea>
+            
+            {% elif field.html_name == 'status' %}
+
+                <label for="{{ field.id_for_label }}" class="block text-lg font-medium mt-[12px] mb-[4px]">{{field.label}}</label>
+                <select name="{{field.html_name}}" id="{{field.auto_id}}" class="w-[400px] h-[40px] rounded-[12px] bg-[#F1F5F9] pt-[4px] pl-[8px] focus:outline-none">
+                    {% for x, y in form.fields.status.choices %} 
+                        <option value="{{ x }}" {% if field.value == x %} selected {% endif %}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+
+            {% else %}
+
+                <label for="{{ field.id_for_label }}" class="block text-lg font-medium mt-[12px] mb-[4px]">{{field.label}}</label>
+                <input type="{{field.field.widget.input_type}}" class="w-[400px] h-[38px] border-0 rounded-[12px] bg-[#F1F5F9] pl-[8px] focus:outline-none" name="{{field.html_name}}" id="{{field.auto_id}}" {% if field.value %} value="{{field.value}}" {% endif %} required="{{field.required}}">
+            
+            {% endif %}
+
+
+            {% if field.help_text %}
+                <p class="text-xs text-[#7C899C] my-2">{{ field.help_text }}</p>
+            {% endif %}
+
+            <ul>
+                {% for error in field.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>     
+        </div>
+    {% endfor %}
+
+    <button class="bg-[#EF4444] w-[400px] h-[42px] rounded-[12px] text-white my-8" type="submit">{% if request.path == '/create-task' %} Add {% else %} Update {% endif %}</button>
+</form>
