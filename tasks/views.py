@@ -175,10 +175,7 @@ class GenericTaskReportCreateView(LoginRequiredMixin, CreateView):
 
 def get_next_run_at(report_time, user_timezone='UTC'):
     # Localize the current time as per user timezone
-    tz = timezone(user_timezone)
-    # curr_datetime = tz.localize(datetime.now(tz=timezone(user_timezone)))
     curr_datetime = datetime.now().astimezone(timezone(user_timezone))
-
 
     # Get the current time in user timezone
     curr_time = curr_datetime.time()
@@ -188,8 +185,7 @@ def get_next_run_at(report_time, user_timezone='UTC'):
     if report_time <= curr_time:
         curr_date += timedelta(days=1)
 
-    # Get the next run time with date and time and convert to UTC
-    # report_time = tz.localize(datetime.combine(curr_date, report_time))
+    # Get the next run time with date and time in user timezone
     report_time = datetime.combine(curr_date, report_time).astimezone(timezone(user_timezone))
 
     return report_time.astimezone(timezone('UTC'))
