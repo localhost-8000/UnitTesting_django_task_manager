@@ -456,7 +456,7 @@ class TestTaskReportCreateView(TestCase):
         self.assertEqual(error.exception.message, 'You have already scheduled a report. Go to /update-report to update your report.')
 
     def test_get_next_run_at_for_report_time_less_than_current_time(self):
-        curr_datetime = datetime.now() - timedelta(minutes=5)
+        curr_datetime = datetime.now(tz=timezone('Asia/Kolkata')) - timedelta(minutes=10)
         curr_date = curr_datetime.date() + timedelta(days=1)
         time_zone = 'Asia/Kolkata'
         report_time = curr_datetime.time()
@@ -467,7 +467,7 @@ class TestTaskReportCreateView(TestCase):
         self.assertEqual(expected_next_run_at, founded_next_run_at)
     
     def test_get_next_run_at_for_report_time_greater_than_current_time(self):
-        curr_datetime = datetime.now() + timedelta(minutes=10)
+        curr_datetime = datetime.now(tz=timezone('Asia/Kolkata')) + timedelta(minutes=10)
         curr_date = curr_datetime.date()
         time_zone = 'Asia/Kolkata'
         report_time = curr_datetime.time()
